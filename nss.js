@@ -1,0 +1,76 @@
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+function httpPost(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "POST", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+// to set a page's html to x, document.body.innerHTML = x
+class RepoManager{
+    constructor(repourl,branch = "main",point="routes"){
+        this.repo = repourl
+        this.branch = branch
+        this.point = point
+    }
+    fetchfiles(){
+        //https://api.github.com/repos/wynwxst/carnellion/git/trees/main
+        var js =httpGet("https://api.github.com/repos/" + this.repo + "/git/trees/" + this.branch)
+        return JSON.parse(js)
+
+    }
+    fetchfile(file){
+        //https://raw.githubusercontent.com/wynwxst/carnellion/main/carnellion/lib.py
+        var js =httpGet("https://raw.githubusercontent.com/" + this.repo + this.branch + this.point + file)
+        return JSON.parse(js)
+
+    }
+    findfiles(dict=null){
+        // implement folder stuff here
+        // file: 100644? folder: 040000
+        var data = {}
+        var js = null
+    if (dict == null){
+        js = this.fetchfiles()
+    } else {
+        console.log(dict["tree"])
+        js = dict
+    }
+    console.log(js.tree)
+        var ar = js["tree"]
+        console.log(ar)
+        var arrayLength = ar.length
+        for (var i = 0; i < arrayLength; i++) {
+            console.log(ar[i].mode)
+            if (ar[i].mode == "100644"){
+            data[ar[i]["path"]] = ar[i]["sha"] 
+            }
+        }
+        return data
+    }
+    findroutes(){
+        var data = {}
+        var routes = {}
+        var js = this.fetchfiles()
+        var ar = js["tree"]
+        var arrayLength = ar.length
+        for (var i = 0; i < arrayLength; i++) {
+            console.log(ar[i].path == this.point)
+            if (ar[i].path == this.point && ar[i].mode == "040000"){
+                console.log(httpGet(ar[i].url))
+                routes = this.findfiles(JSON.parse(httpGet(ar[i].url)))
+            
+                
+            data[ar[i]["path"]] = ar[i]["sha"] 
+            }
+        }
+        this.routes = routes
+        return this.routes
+    }
+}
