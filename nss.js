@@ -13,6 +13,49 @@ function httpPost(theUrl)
     return xmlHttp.responseText;
 }
 // to set a page's html to x, document.body.innerHTML = x
+function parseroute(){
+    
+}
+class nssCallback{
+    constructor(route,callback){
+        this.route = route
+        this.cb = callback
+    }
+}
+class RouteManager{
+    constructor(rm={}){
+        this.repomanager = rm
+        this.routes = rm.routes
+        this.routes = {}
+        this.routes["GET"] = {}
+        this.routes["POST"] = {}
+    }
+    parseargs(){
+        var args = new URLSearchParams(window.location.search);
+    }
+    parsepath(){
+        var path = document.location.pathname.replace("/" + this.repomanager.repo,"")
+        return path
+    }
+    execute(){
+        var path = this.parsepath()
+        if (path.endsWith("/") == true){
+            path = path.slice(0, -1)
+        }
+        console.log(path)
+        this.routes
+
+        
+
+    }
+    setcontent(content){
+        document.body.innerHTML = String(content)
+    }
+    add(method,callback){
+        // add support for other methods later
+        this.routes[method][callback.route] = callback.cb
+    }
+}
 class RepoManager{
     constructor(repourl,branch = "main",point="routes"){
         this.repo = repourl
@@ -74,3 +117,4 @@ class RepoManager{
         return this.routes
     }
 }
+
