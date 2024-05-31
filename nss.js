@@ -64,8 +64,9 @@ class RouteManager{
         }
     console.log("ret:")
     console.log(ret)
+    const loadcontent = this.setcontent
     window.onload = function(){
-    this.setcontent(ret)}
+    loadcontent(ret)}
 
 
         
