@@ -76,7 +76,7 @@ class RepoManager{
         this.repo = repourl
         this.branch = branch
         this.point = point
-        this.reponame = repourl.split("/")[-1]
+        this.reponame = repourl.split("/")[1]
     }
     fetchfiles(){
         //https://api.github.com/repos/wynwxst/carnellion/git/trees/main
