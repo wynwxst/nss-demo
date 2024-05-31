@@ -36,6 +36,7 @@ class RouteManager{
     }
     parsepath(){
         var path = document.location.pathname.replace("/" + this.repomanager.reponame,"")
+        console.log(this.repomanager.reponame)
         return path
     }
     execute(){
