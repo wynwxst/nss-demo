@@ -45,6 +45,9 @@ class RouteManager{
         if (path.endsWith("/") == true){
             path = path.slice(0, -1)
         }
+        if (path.startsWith("/") == true){
+            path = path.substring(1)
+        }
         console.log(path)
         if (this.routes[path] != undefined){
             var cb = this.routes[path]
@@ -53,6 +56,8 @@ class RouteManager{
             } else {
                 ret = cb()
             }
+        } else {
+            return console.log("Not found")
         }
     this.setcontent(String(ret))
 
