@@ -35,7 +35,7 @@ class RouteManager{
         return args
     }
     parsepath(){
-        var path = document.location.pathname.replace("/" + this.repomanager.repo,"")
+        var path = document.location.pathname.replace("/" + this.repomanager.reponame,"")
         return path
     }
     execute(){
@@ -75,6 +75,7 @@ class RepoManager{
         this.repo = repourl
         this.branch = branch
         this.point = point
+        this.reponame = repourl.split("/")[-1]
     }
     fetchfiles(){
         //https://api.github.com/repos/wynwxst/carnellion/git/trees/main
