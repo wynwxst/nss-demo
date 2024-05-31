@@ -1,5 +1,13 @@
 <script src="nss.js"></script>
 <script>
-    route = RouteManager()
+    repo = new RepoManager("wynwxst/carnellion","main","carnellion")
+    route = new RouteManager(repo)
+    function onetwothreefour(args){
+        return "hihi! :3"
+    }
+
+    idk = new Route("1234",onetwothreefour)
+    route.add(idk)
+    route.execute()
 </script>
 Ai 404

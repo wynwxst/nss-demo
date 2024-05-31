@@ -16,7 +16,7 @@ function httpPost(theUrl)
 function parseroute(){
     
 }
-class nssCallback{
+class Route{
     constructor(route,callback){
         this.route = route
         this.cb = callback
@@ -32,18 +32,29 @@ class RouteManager{
     }
     parseargs(){
         var args = new URLSearchParams(window.location.search);
+        return args
     }
     parsepath(){
         var path = document.location.pathname.replace("/" + this.repomanager.repo,"")
         return path
     }
     execute(){
+        var ret = ""
         var path = this.parsepath()
         if (path.endsWith("/") == true){
             path = path.slice(0, -1)
         }
         console.log(path)
-        this.routes
+        if (this.routes[path] != undefined){
+            var cb = this.routes[path]
+            if (cb.length  == 1){
+                ret = cb(this.parseargs())
+            } else {
+                ret = cb()
+            }
+        }
+    this.setcontent(String(ret))
+
 
         
 
@@ -51,9 +62,12 @@ class RouteManager{
     setcontent(content){
         document.body.innerHTML = String(content)
     }
-    add(method,callback){
-        // add support for other methods later
-        this.routes[method][callback.route] = callback.cb
+    add(callback){
+        // method support seems impossible unless through a browser check which is not rly method
+        // parse route later
+        console.log(callback)
+        this.routes[callback.route] = callback.cb
+        console.log(this.routes)
     }
 }
 class RepoManager{
