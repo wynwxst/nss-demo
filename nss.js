@@ -39,6 +39,9 @@ class RouteManager{
         console.log(this.repomanager.reponame)
         return path
     }
+    setcontent(content){
+        document.body.innerHTML = String(content)
+    }
     execute(){
         var ret = ""
         var path = this.parsepath()
@@ -59,15 +62,15 @@ class RouteManager{
         } else {
             return console.log("Not found")
         }
-    this.setcontent(String(ret))
+    console.log("ret:")
+    console.log(ret)
+    this.setcontent(ret)
 
 
         
 
     }
-    setcontent(content){
-        document.body.innerHTML = String(content)
-    }
+
     add(callback){
         // method support seems impossible unless through a browser check which is not rly method
         // parse route later
