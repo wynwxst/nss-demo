@@ -112,10 +112,16 @@ class FileManager{
     }
 
     }
-    fetchfile(file){
+    fetchfile(file,jsonop=true){
         //https://raw.githubusercontent.com/wynwxst/carnellion/main/carnellion/lib.py
+    if (jsonop == true){
         var js =httpGet("https://raw.githubusercontent.com/" + this.repo + "/" +  this.branch + "/" + this.point + "/" + file)
         return JSON.parse(js)
+    } else {
+        var js =httpGet("https://raw.githubusercontent.com/" + this.repo + "/" +  this.branch + "/" + this.point + "/" + file)
+        return String(js)
+
+    }
 
     }
     findfiles(dict=null){
