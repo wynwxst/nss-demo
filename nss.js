@@ -101,10 +101,15 @@ class FileManager{
         this.reponame = repourl.split("/")[1]
         this.owner = repourl.split("/")[0]
     }
-    fetchfiles(){
+    fetchfiles(point=false){
         //https://api.github.com/repos/wynwxst/carnellion/git/trees/main
+        if (point == false){
         var js =httpGet("https://api.github.com/repos/" + this.repo + "/git/trees/" + this.branch)
         return JSON.parse(js)
+    } else {
+        var js =httpGet("https://api.github.com/repos/" + this.repo + "/git/trees/" + this.branch + "/" + this.point)
+        return JSON.parse(js)
+    }
 
     }
     fetchfile(file){
@@ -210,7 +215,7 @@ class FileManager{
 class TemplateManager{
     constructor(repourl,branch="main",point="templates"){
         this.files = new FileManager(repourl,branch,point)
-        this.fslist = this.files.fetchfiles()
+        this.fslist = this.files.findroutes()
     }
     load_template(file,vars={}){
         if ((file in this.fslist) == false){
