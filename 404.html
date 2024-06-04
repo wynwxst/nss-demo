@@ -1,13 +1,16 @@
 <script src="nss.js"></script>
+<script type="module">
+    import { Octokit } from "https://esm.sh/@octokit/core";
+</script>
 <script>
-    repo = new RepoManager("wynwxst/nss-demo","main","carnellion")
+    repo = new FileManager("wynwxst/nss-demo","main")
     route = new RouteManager(repo)
     function onetwothreefour(args){
         console.log("Calld!")
         return "hihi! :3"
     }
 
-    idk = new Route("1234",onetwothreefour)
+    idk = new Route("1234/5678",onetwothreefour)
     route.add(idk)
     route.execute()
 </script>
