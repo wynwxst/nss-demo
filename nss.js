@@ -177,7 +177,7 @@ class FileManager{
               // 
 
               
-              await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
+              let req = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
                 owner: this.owner,
                 repo: this.reponame,
                 path: this.point + "/" + file,
@@ -191,7 +191,13 @@ class FileManager{
                 headers: {
                   'X-GitHub-Api-Version': '2022-11-28'
                 }
-              })
+                
+              
+        
+            }
+        
+        )
+        return req
               
         } else {
             // addition, why is there even a diff? -> probably for sha ? 
