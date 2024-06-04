@@ -40,7 +40,11 @@ class RouteManager{
         return path
     }
     setcontent(content){
-        document.body.innerHTML = String(content)
+        var elm = document.open()
+        elm.write(String(content))
+        elm.close()
+        elm = null
+        return 0 
     }
     execute(){
         var ret = ""
