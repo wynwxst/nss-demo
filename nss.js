@@ -94,7 +94,7 @@ class FileManager{
             
             console.clear()
         }
-        this.oauth = ouath
+        this.oauth = oauth // how tf did I typo this....
         this.repo = repourl
         this.branch = branch
         this.point = point
