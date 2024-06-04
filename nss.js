@@ -36,7 +36,6 @@ class RouteManager{
     }
     parsepath(){
         var path = document.location.pathname.replace("/" + this.repomanager.reponame,"")
-        console.log(this.repomanager.reponame)
         return path
     }
     setcontent(content){
@@ -55,7 +54,6 @@ class RouteManager{
         if (path.startsWith("/") == true){
             path = path.substring(1)
         }
-        console.log(path)
         if (this.routes[path] != undefined){
             var cb = this.routes[path]
             if (cb.length  == 1){
@@ -66,8 +64,7 @@ class RouteManager{
         } else {
             return console.log("Not found")
         }
-    console.log("ret:")
-    console.log(ret)
+
     const loadcontent = this.setcontent
     // do we wanna add the following directly into whatever html content will be served?
     //<script src="nss.js"></script>
@@ -136,15 +133,12 @@ class FileManager{
     if (dict == null){
         js = this.fetchfiles()
     } else {
-        console.log(dict["tree"])
+
         js = dict
     }
-    console.log(js.tree)
         var ar = js["tree"]
-        console.log(ar)
         var arrayLength = ar.length
         for (var i = 0; i < arrayLength; i++) {
-            console.log(ar[i].mode)
             if (ar[i].mode == "100644"){
             data[ar[i]["path"]] = ar[i]["sha"] 
             }
@@ -158,9 +152,7 @@ class FileManager{
         var ar = js["tree"]
         var arrayLength = ar.length
         for (var i = 0; i < arrayLength; i++) {
-            console.log(ar[i].path == this.point)
             if (ar[i].path == this.point && ar[i].mode == "040000"){
-                console.log(httpGet(ar[i].url))
                 routes = this.findfiles(JSON.parse(httpGet(ar[i].url)))
             
                 
