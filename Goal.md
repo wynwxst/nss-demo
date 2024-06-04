@@ -16,3 +16,5 @@ If it is something you must hide or secure against, you must look into a server 
 + the network tab is a pain. another thing would be calling funcs right from console although that's still salvagable in a realistic sense so the best solution now would be to focus on other features, and although implement write features for whoever may use, advise not to use it unless obfuscated or some other mitigations are used. (probably not the level of complexity you'd see on github pages anyways)
 
 To do: add /route/<anything>
+add app class
+add error handling (from funcs & 404)
