@@ -207,3 +207,22 @@ class FileManager{
     }
 }
 
+class TemplateManager{
+    constructor(){
+        this.files = new FileManager(point="templates")
+        this.fslist = this.files.findfiles()
+    }
+    load_template(file,vars={}){
+        if ((file in this.fslist) == false){
+            return console.log("Template not found")
+        }
+        content = this.files.fetchfile(file)
+        for(var key in vars) {
+            content = content.replace("{{" + key + "}}",vars[key])
+
+            
+         }
+        return content
+    }
+    
+}
