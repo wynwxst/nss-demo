@@ -227,7 +227,7 @@ class TemplateManager{
         if ((file in this.fslist) == false){
             return console.log("Template not found")
         }
-        content = this.files.fetchfile(file,false)
+        var content = this.files.fetchfile(file,false) // ... implicit decl of vars aren't allowed WHY . Ok... deep breaths
         for(var key in vars) {
             content = content.replace("{{" + key + "}}",vars[key])
 
