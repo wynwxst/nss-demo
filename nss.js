@@ -83,9 +83,8 @@ class RouteManager{
     add(callback){
         // method support seems impossible unless through a browser check which is not rly method
         // parse route later
-        console.log(callback)
+        
         this.routes[callback.route] = callback.cb
-        console.log(this.routes)
     }
 }
 class FileManager{
