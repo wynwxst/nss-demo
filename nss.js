@@ -210,7 +210,7 @@ class FileManager{
 class TemplateManager{
     constructor(repourl,branch="main",point="templates"){
         this.files = new FileManager(repourl,branch,point)
-        this.fslist = this.files.findfiles()
+        this.fslist = this.files.fetchfiles()
     }
     load_template(file,vars={}){
         if ((file in this.fslist) == false){
